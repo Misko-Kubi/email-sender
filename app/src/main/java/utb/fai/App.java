@@ -1,0 +1,28 @@
+package utb.fai;
+
+public class App {
+
+    public static void main(String[] args) {
+        // Kontrola, zda bylo předáno dostatečné množství argumentů
+        if (args.length < 6) {
+            System.err.println("Nedostatecny pocet argumentu. Ocekavano: <host> <port> <from> <to> <subject> <text>");
+            return;
+        }
+
+        try {
+            String host = args[0];
+            int port = Integer.parseInt(args[1]);
+            String from = args[2];
+            String to = args[3];
+            String subject = args[4];
+            String text = args[5];
+
+            EmailSender sender = new EmailSender(host, port);
+            sender.send(from, to, subject, text);
+            sender.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+    }
+}
